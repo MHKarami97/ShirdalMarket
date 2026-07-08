@@ -8,7 +8,7 @@
     moonIcon: document.getElementById("iconMoon"),
 
     init() {
-      const saved = localStorage.getItem(this.key) || "dark";
+      const saved = localStorage.getItem(this.key) || "light";
       this.apply(saved);
       this.toggleBtn.addEventListener("click", () => this.toggle());
     },
@@ -23,8 +23,8 @@
 
     toggle() {
       const current =
-        document.documentElement.getAttribute("data-theme") || "dark";
-      this.apply(current === "dark" ? "light" : "dark");
+        document.documentElement.getAttribute("data-theme") || "light";
+      this.apply(current === "light" ? "dark" : "light");
     },
   };
 
