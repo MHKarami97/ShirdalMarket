@@ -1,0 +1,183 @@
+---
+layout: default
+schema_type: product
+---
+
+<div class="container--page-sm">
+
+  <nav aria-label="مسیر صفحه" class="breadcrumb">
+    <a href="{{ '/' | relative_url }}">خانه</a>
+    <span class="rtl-flip">›</span>
+    {% assign cat_data = site.data.categories | where: "slug", page.category | first %}
+    <a href="{{ '/categories/' | append: page.category | relative_url }}">{{ cat_data.name | default: page.category }}</a>
+    <span class="rtl-flip">›</span>
+    <span class="breadcrumb__current">{{ page.title }}</span>
+  </nav>
+
+  <div class="product-grid-2col">
+
+    <div data-gallery>
+      <div class="gallery-main gallery-main--zoomable" title="کلیک برای بزرگنمایی">
+        <img
+          data-gallery-main
+          src="{{ page.images[0] | relative_url }}"
+          alt="{{ page.title }} — تصویر اصلی محصول"
+          width="600"
+          height="600"
+        >
+      </div>
+
+      {% if page.images.size > 1 %}
+      <div class="gallery-thumbs" role="list" aria-label="گالری تصاویر">
+        {% for img in page.images %}
+        <div
+          class="gallery-thumb {% if forloop.first %}active{% endif %}"
+          role="listitem"
+          data-gallery-thumb
+          data-src="{{ img | relative_url }}"
+          data-alt="{{ page.title }} — تصویر {{ forloop.index }}"
+          tabindex="0"
+          aria-label="تصویر {{ forloop.index }} از {{ page.images.size }}"
+        >
+          <img
+            src="{{ img | relative_url }}"
+            alt="{{ page.title }} — تصویر {{ forloop.index }}"
+            loading="lazy"
+            width="72"
+            height="72"
+          >
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div>
+      {% if page.brand %}
+      <p class="product-brand">{{ page.brand }}</p>
+      {% endif %}
+
+      <h1 class="product-title">{{ page.title }}</h1>
+
+      {% if page.sku %}
+      <p class="product-sku">کد محصول: <span class="product-sku__value">{{ page.sku }}</span></p>
+      {% endif %}
+
+      <div class="product-badge">
+        {% if page.availability == 'in_stock' %}
+        <span class="badge-in-stock">موجود در انبار</span>
+        {% elsif page.availability == 'out_of_stock' %}
+        <span class="badge-out-of-stock">ناموجود</span>
+        {% elsif page.availability == 'preorder' %}
+        <span class="badge-preorder">پیش‌فروش</span>
+        {% endif %}
+      </div>
+
+      <div class="product-pricing">
+        <span class="price-current">{{ page.price | number_with_delimiter }} تومان</span>
+        {% if page.old_price %}
+        <span class="price-old">{{ page.old_price | number_with_delimiter }} تومان</span>
+        {% assign discount = page.old_price | minus: page.price | times: 100 | divided_by: page.old_price %}
+        <span class="price-discount">{{ discount }}٪ تخفیف</span>
+        {% endif %}
+      </div>
+
+      {% if page.short_description %}
+      <p class="product-short-desc">
+        {{ page.short_description }}
+      </p>
+      {% endif %}
+
+      {% if page.variants %}
+      <div class="product-variants">
+        {% for variant in page.variants %}
+        <div class="product-variant-group">
+          <p class="product-variant-label">{{ variant.name }}:</p>
+          <div class="product-variant-options" data-variant-group>
+            {% for option in variant.options %}
+            <button
+              class="variant-btn {% if forloop.first %}active{% endif %}"
+              onclick="this.closest('[data-variant-group]').querySelectorAll('.variant-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')"
+              type="button"
+            >
+              {{ option }}
+            </button>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <button
+        class="btn-primary btn-primary--full"
+        onclick="ContactModal.open({
+          productName: '{{ page.title | escape }}',
+          productUrl: '{{ page.url | absolute_url }}',
+          whatsapp: '{{ site.data.settings.whatsapp }}',
+          telegram: '{{ site.data.settings.telegram }}',
+          instagram: '{{ site.data.settings.instagram }}'
+        })"
+        {% if page.availability == 'out_of_stock' %}disabled class="btn-primary btn-primary--disabled"{% endif %}
+      >
+        ارتباط برای خرید
+      </button>
+
+      <p class="product-contact-note">
+        ارتباط مستقیم از طریق واتساپ، تلگرام یا اینستاگرام
+      </p>
+    </div>
+  </div>
+
+  {% if page.specifications %}
+  <section class="product-section" aria-labelledby="specs-heading">
+    <div class="section-header">
+      <h2 id="specs-heading" class="section-header__title">مشخصات فنی</h2>
+    </div>
+    <div class="product-specs">
+      <table class="specs-table" aria-label="جدول مشخصات فنی {{ page.title }}">
+        <tbody>
+          {% for spec in page.specifications %}
+          <tr>
+            <td>{{ spec.key }}</td>
+            <td>{{ spec.value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="product-section" aria-labelledby="desc-heading">
+    <div class="section-header">
+      <h2 id="desc-heading" class="section-header__title">توضیحات کامل</h2>
+    </div>
+    <div class="product-description">
+      {{ content }}
+    </div>
+  </section>
+
+  {% assign same_cat = site.products | where: "category", page.category | limit: 5 %}
+  {% assign found_any = false %}
+  {% for p in same_cat %}
+    {% if p.slug != page.slug %}
+      {% assign found_any = true %}
+    {% endif %}
+  {% endfor %}
+  {% if found_any %}
+  <section class="product-section" aria-labelledby="related-heading">
+    <div class="section-header">
+      <h2 id="related-heading" class="section-header__title">محصولات مشابه</h2>
+    </div>
+    <div class="product-related-grid">
+      {% for prod in same_cat %}
+        {% if prod.slug != page.slug %}
+          {% include product-card.html product=prod %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+</div>

@@ -1,0 +1,66 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-container">
+    <div class="footer-grid">
+
+      <div>
+        <h2 class="footer-brand__title">
+          {{ site.title }}
+        </h2>
+        <p class="footer-brand__desc">
+          {{ site.description }}
+        </p>
+        <div class="footer-social">
+          {% if site.data.settings.instagram %}
+          <a href="https://instagram.com/{{ site.data.settings.instagram }}" target="_blank" rel="noopener" aria-label="اینستاگرام"
+            class="footer-social__link"><img src="{{ '/assets/img/icon-instagram.svg' | relative_url }}" alt="" width="20" height="20"></a>
+          {% endif %}
+          {% if site.data.settings.telegram %}
+          <a href="https://t.me/{{ site.data.settings.telegram }}" target="_blank" rel="noopener" aria-label="تلگرام"
+            class="footer-social__link"><img src="{{ '/assets/img/icon-telegram.svg' | relative_url }}" alt="" width="20" height="20"></a>
+          {% endif %}
+          {% if site.data.settings.whatsapp %}
+          <a href="https://wa.me/{{ site.data.settings.whatsapp }}" target="_blank" rel="noopener" aria-label="واتساپ"
+            class="footer-social__link"><img src="{{ '/assets/img/icon-whatsapp.svg' | relative_url }}" alt="" width="20" height="20"></a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer-links__title">دسترسی سریع</h3>
+        <ul class="footer-links">
+          <li><a href="{{ '/' | relative_url }}" class="footer-link">خانه</a></li>
+          <li><a href="{{ '/products/' | relative_url }}" class="footer-link">همه محصولات</a></li>
+          <li><a href="{{ '/about/' | relative_url }}" class="footer-link">درباره ما</a></li>
+          <li><a href="{{ '/faq/' | relative_url }}" class="footer-link">سوالات متداول</a></li>
+          <li><a href="{{ '/contact/' | relative_url }}" class="footer-link">تماس با ما</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-links__title">قوانین</h3>
+        <ul class="footer-links">
+          <li><a href="{{ '/terms/' | relative_url }}" class="footer-link">قوانین و مقررات</a></li>
+          <li><a href="{{ '/privacy/' | relative_url }}" class="footer-link">حریم خصوصی</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-links__title">اطلاعات تماس</h3>
+        <div class="footer-contact">
+          {% if site.data.settings.phone %}<div>{{ site.data.settings.phone }}</div>{% endif %}
+          {% if site.data.settings.email %}<div>{{ site.data.settings.email }}</div>{% endif %}
+          {% if site.data.settings.address %}<div>{{ site.data.settings.address }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-bottom__text">
+        &copy; {{ 'now' | date: "%Y" }} {{ site.title }}. تمامی حقوق محفوظ است.
+      </p>
+      <p class="footer-bottom__text">
+        ساخته شده توسط mhkarami97
+      </p>
+    </div>
+  </div>
+</footer>

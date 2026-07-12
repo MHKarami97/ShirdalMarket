@@ -1,0 +1,124 @@
+---
+layout: default
+title: "همه محصولات"
+description: "مشاهده تمام محصولات فروشگاه با امکان فیلتر و جستجو"
+permalink: /products/
+---
+
+<div class="container--page">
+  <h1 class="page-title">همه محصولات</h1>
+  <p class="page-desc">{{ site.products.size }} محصول</p>
+
+  <div class="filter-bar">
+    <div class="search-bar">
+      <input
+        class="search-bar__input"
+        type="search"
+        id="product-search"
+        placeholder="جستجوی محصول..."
+        aria-label="جستجوی محصول"
+        oninput="filterProducts()"
+      >
+      <button class="search-bar__btn" type="button" aria-label="جستجو">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+    </div>
+
+    <div class="custom-select" data-custom-select data-filter="category">
+      <button class="custom-select__trigger" type="button" aria-haspopup="listbox">
+        <span class="custom-select__value">همه دسته‌بندی‌ها</span>
+        <svg class="custom-select__arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <ul class="custom-select__options" role="listbox">
+        <li class="custom-select__option custom-select__option--selected" data-value="" role="option">همه دسته‌بندی‌ها</li>
+        {% assign categories = site.products | map: "category" | uniq | sort %}
+        {% for cat in categories %}
+        {% assign cat_data = site.data.categories | where: "slug", cat | first %}
+        <li class="custom-select__option" data-value="{{ cat }}" role="option">{{ cat_data.name | default: cat }}</li>
+        {% endfor %}
+      </ul>
+      <select id="category-filter" class="sr-only" tabindex="-1" aria-hidden="true">
+        <option value="">همه دسته‌بندی‌ها</option>
+        {% for cat in categories %}
+        <option value="{{ cat }}">{{ cat }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="custom-select" data-custom-select data-filter="availability">
+      <button class="custom-select__trigger" type="button" aria-haspopup="listbox">
+        <span class="custom-select__value">وضعیت موجودی</span>
+        <svg class="custom-select__arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <ul class="custom-select__options" role="listbox">
+        <li class="custom-select__option custom-select__option--selected" data-value="" role="option">وضعیت موجودی</li>
+        <li class="custom-select__option" data-value="in_stock" role="option">موجود</li>
+        <li class="custom-select__option" data-value="out_of_stock" role="option">ناموجود</li>
+        <li class="custom-select__option" data-value="preorder" role="option">پیش‌فروش</li>
+      </ul>
+      <select id="availability-filter" class="sr-only" tabindex="-1" aria-hidden="true">
+        <option value="">وضعیت موجودی</option>
+        <option value="in_stock">موجود</option>
+        <option value="out_of_stock">ناموجود</option>
+        <option value="preorder">پیش‌فروش</option>
+      </select>
+    </div>
+
+    <span id="result-count" class="result-count"></span>
+  </div>
+
+  <div id="products-grid" class="products-grid">
+    {% for product in site.products %}
+    <div
+      class="product-item"
+      data-title="{{ product.title | downcase }}"
+      data-category="{{ product.category }}"
+      data-availability="{{ product.availability }}"
+      data-brand="{{ product.brand | downcase }}"
+      data-description="{{ product.short_description | downcase }}"
+    >
+      {% include product-card.html product=product %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="no-results" class="no-results">
+    <p class="no-results__title">محصولی یافت نشد</p>
+    <p class="no-results__desc">فیلترها را تغییر دهید یا کلمه دیگری جستجو کنید</p>
+  </div>
+</div>
+
+<script>
+  function filterProducts() {
+    const query = document.getElementById('product-search').value.toLowerCase().trim();
+    const category = document.getElementById('category-filter').value;
+    const availability = document.getElementById('availability-filter').value;
+    const items = document.querySelectorAll('.product-item');
+    let count = 0;
+
+    items.forEach(item => {
+      const matchQuery = !query ||
+        item.dataset.title.includes(query) ||
+        item.dataset.brand.includes(query) ||
+        item.dataset.description.includes(query);
+      const matchCat = !category || item.dataset.category === category;
+      const matchAvail = !availability || item.dataset.availability === availability;
+      const visible = matchQuery && matchCat && matchAvail;
+      item.style.display = visible ? 'block' : 'none';
+      if (visible) count++;
+    });
+
+    document.getElementById('result-count').textContent = count + ' محصول یافت شد';
+    document.getElementById('no-results').style.display = count === 0 ? 'block' : 'none';
+    document.getElementById('products-grid').style.display = count === 0 ? 'none' : 'grid';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q) {
+      document.getElementById('product-search').value = q;
+    }
+    filterProducts();
+  });
+</script>

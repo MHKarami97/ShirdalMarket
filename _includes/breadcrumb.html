@@ -1,0 +1,19 @@
+{% comment %}
+  Usage:
+  {% include breadcrumb.html items=breadcrumb_items %}
+  items: array of {title, url} — last item has no url
+{% endcomment %}
+
+<nav aria-label="مسیر صفحه" class="breadcrumb">
+  <a href="{{ '/' | relative_url }}">خانه</a>
+
+  {% for item in include.items %}
+  <span class="rtl-flip">›</span>
+
+  {% if item.url and forloop.last == false %}
+  <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+  {% else %}
+  <span class="breadcrumb__current">{{ item.title }}</span>
+  {% endif %}
+  {% endfor %}
+</nav>

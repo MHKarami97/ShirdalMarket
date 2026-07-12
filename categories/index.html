@@ -1,0 +1,28 @@
+---
+layout: default
+title: "دسته‌بندی محصولات"
+description: "مشاهده تمام دسته‌بندی‌های فروشگاه"
+permalink: /categories/
+---
+
+<div class="container--page">
+  <h1 class="page-title">دسته‌بندی محصولات</h1>
+
+  <div class="category-grid--categories">
+    {% for cat in site.data.categories %}
+    <a href="{{ '/categories/' | append: cat.slug | relative_url }}"
+      class="category-card--page"
+      style="background:{{ cat.bg_color | default: '#f2f4f5' }};"
+    >
+      {% if cat.image %}
+      <img src="{{ cat.image | relative_url }}" alt="دسته‌بندی {{ cat.name }}" class="category-card__img--cover" loading="lazy">
+      {% endif %}
+      <div class="category-card__overlay--dark">
+        <span class="category-card__name--lg">{{ cat.name }}</span>
+        {% assign count = site.products | where: "category", cat.slug | size %}
+        <span class="category-card__count">{{ count }} محصول</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>

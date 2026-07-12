@@ -1,0 +1,62 @@
+{% comment %}
+  Usage: {% include product-card.html product=product %}
+{% endcomment %}
+
+{% assign product = include.product %}
+
+<article class="product-card" itemscope itemtype="https://schema.org/Product">
+  <a href="{{ product.url | relative_url }}" class="product-card__link">
+    <div class="product-card__media">
+      {% if product.old_price %}
+      <span class="price-discount product-card__discount">
+        {% assign discount = product.old_price | minus: product.price | times: 100 | divided_by: product.old_price %}
+        {{ discount }}٪ تخفیف
+      </span>
+      {% endif %}
+
+      <img
+        class="product-card__image"
+        src="{{ product.images[0] | relative_url }}"
+        alt="{{ product.title }} — تصویر محصول"
+        loading="lazy"
+        width="400"
+        height="400"
+        itemprop="image"
+      >
+    </div>
+
+    <div class="product-card__body">
+      {% if product.brand %}
+      <p class="product-card__brand" itemprop="brand">{{ product.brand }}</p>
+      {% endif %}
+
+      <h3 class="product-card__title" itemprop="name">{{ product.title }}</h3>
+
+      {% if product.short_description %}
+      <p class="product-card__desc">
+        {{ product.short_description }}
+      </p>
+      {% endif %}
+
+      <div class="product-card__footer">
+        <div class="product-card__prices">
+          <span class="price-current" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="IRR">
+            <span itemprop="price" content="{{ product.price }}">{{ product.price | number_with_delimiter }} تومان</span>
+          </span>
+          {% if product.old_price %}
+          <span class="price-old">{{ product.old_price | number_with_delimiter }}</span>
+          {% endif %}
+        </div>
+
+        {% if product.availability == 'in_stock' %}
+        <span class="badge-in-stock" itemprop="availability" content="https://schema.org/InStock">موجود</span>
+        {% elsif product.availability == 'out_of_stock' %}
+        <span class="badge-out-of-stock" itemprop="availability" content="https://schema.org/OutOfStock">ناموجود</span>
+        {% elsif product.availability == 'preorder' %}
+        <span class="badge-preorder" itemprop="availability" content="https://schema.org/PreOrder">پیش‌فروش</span>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</article>

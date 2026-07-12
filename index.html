@@ -1,279 +1,134 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+---
+layout: default
+title: "فروشگاه آنلاین — خرید محصولات با کیفیت"
+description: "خرید آنلاین محصولات با کیفیت، تنوع بالا و ارتباط مستقیم از طریق واتساپ و تلگرام"
+---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>شیردال | فروشگاه آنلاین شیردال - اینستاگرام، تلگرام، باسلام و دیجی‌کالا</title>
-    <meta name="description"
-        content="شیردال، فروشگاه آنلاین معتبر. ما را در اینستاگرام، تلگرام، باسلام و دیجی‌کالا دنبال کنید. تماس با ما از طریق واتساپ، تلگرام، ایمیل و تلفن.">
-    <meta name="keywords"
-        content="شیردال, فروشگاه شیردال, خرید آنلاین, اینستاگرام شیردال, دیجی کالا شیردال, باسلام شیردال">
-    <meta name="author" content="Sheerdal">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://sheerdalmarket.ir">
+<div class="container">
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="شیردال | فروشگاه آنلاین">
-    <meta property="og:description"
-        content="صفحه رسمی معرفی فروشگاه شیردال در شبکه‌های اجتماعی و فروشگاه‌های اینترنتی.">
-    <meta property="og:image" content="assets/favicon.png">
-    <meta property="og:url" content="https://sheerdalmarket.ir">
-    <meta property="og:locale" content="fa_IR">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="شیردال | فروشگاه آنلاین">
-    <meta name="twitter:description"
-        content="صفحه رسمی معرفی فروشگاه شیردال در شبکه‌های اجتماعی و فروشگاه‌های اینترنتی.">
-    <meta name="twitter:image" content="assets/favicon.png">
-
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="apple-touch-icon" href="assets/favicon.png">
-    <meta name="theme-color" content="#f2a71b">
-    <link rel="stylesheet" href="Vazirmatn-font-face.css">
-    <link rel="stylesheet" href="style.css">
-
-    <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "شیردال",
-    "alternateName": "Sheerdal",
-    "url": "https://sheerdalmarket.ir",
-    "logo": "assets/favicon.png",
-    "sameAs": [
-      "https://instagram.com/sheerdalmarket",
-      "https://t.me/sheerdalmarket_ir",
-      "https://basalam.com/sheerdalmarket",
-      "https://www.digikala.com/seller/sheerdalmarket"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+98-900-000-0000",
-      "contactType": "customer service",
-      "areaServed": "IR",
-      "availableLanguage": ["fa"]
-    }
-  }
-  </script>
-</head>
-
-<body>
-
-    <a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
-
-    <header class="hero" role="banner">
-        <nav class="navbar" aria-label="منوی اصلی">
-            <a href="#main" class="logo" aria-label="شیردال - صفحه اصلی">شیر<span>دال</span></a>
-            <button class="theme-toggle" id="themeToggle" aria-label="تغییر حالت روشن و تاریک" title="تغییر تم">
-                <svg id="iconSun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <circle cx="12" cy="12" r="5" />
-                    <path
-                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                </svg>
-                <svg id="iconMoon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" style="display:none">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                </svg>
-            </button>
-        </nav>
-
-        <div class="hero-content">
-            <img src="assets/logo.png" alt="لوگوی شیردال - گریفین طلایی" class="hero-logo" width="88" height="88"
-                loading="eager">
-            <div class="hero-badge">فروشگاه آنلاین</div>
-            <h1>شیردال</h1>
-            <p class="hero-sub">کیفیت اصیل، اعتماد پایدار. محصولات ما را در شبکه‌های اجتماعی و فروشگاه‌های اینترنتی
-                معتبر دنبال کنید.</p>
-            <a href="#platforms" class="btn-primary">مشاهده صفحات ما</a>
+  <section
+    data-hero-slider
+    class="hero-slider"
+    aria-label="بنرهای ویژه"
+  >
+    {% assign hero_products = site.products | limit: 5 %}
+    {% for product in hero_products %}
+    <div data-slide class="hero-slide" {% if forloop.first == false %}style="display:none;"{% endif %}>
+      <div class="hero-slide__content">
+        <h1 class="hero-slide__title">{{ product.title }}</h1>
+        <p class="hero-slide__desc">{{ product.short_description }}</p>
+        <div class="hero-slide__pricing">
+          <span class="price-current">{{ product.price | number_with_delimiter }} تومان</span>
+          {% if product.old_price %}
+          <span class="price-old">{{ product.old_price | number_with_delimiter }} تومان</span>
+          {% assign discount = product.old_price | minus: product.price | times: 100 | divided_by: product.old_price %}
+          <span class="price-discount">{{ discount }}٪ تخفیف</span>
+          {% endif %}
         </div>
-        <div class="hero-shape" aria-hidden="true"></div>
-    </header>
+        <a href="{{ product.url | relative_url }}" class="btn-primary">مشاهده محصول</a>
+      </div>
+      <div class="hero-slide__media">
+        <img src="{{ product.images[0] | relative_url }}" alt="{{ product.title }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+      </div>
+    </div>
+    {% endfor %}
 
-    <main id="main">
+    {% if hero_products.size > 1 %}
+    <button data-slide-prev aria-label="قبلی" class="hero-slider__btn hero-slider__btn--prev">‹</button>
+    <button data-slide-next aria-label="بعدی" class="hero-slider__btn hero-slider__btn--next">›</button>
+    {% endif %}
+  </section>
 
-        <section id="platforms" class="section" aria-labelledby="platforms-title">
-            <h2 id="platforms-title">ما را دنبال کنید</h2>
-            <p class="section-sub">شیردال در پلتفرم‌های زیر فعال است</p>
+  <section class="search-section" aria-label="جستجو">
+    <form action="{{ '/products/' | relative_url }}" method="get" role="search">
+      <div class="search-bar">
+        <input
+          class="search-bar__input"
+          type="search"
+          name="q"
+          placeholder="دنبال چه محصولی می‌گردید؟"
+          aria-label="جستجوی محصول"
+        >
+        <button class="search-bar__btn" type="submit" aria-label="جستجو">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+      </div>
+    </form>
+  </section>
 
-            <div class="cards-grid">
+  <section class="categories-section" aria-label="دسته‌بندی‌های محصولات">
+    <div class="categories-pills">
+      <a href="{{ '/products/' | relative_url }}" class="category-pill">
+        <span class="category-pill__icon">همه</span>
+        همه محصولات
+      </a>
+      {% for cat in site.data.categories %}
+      <a href="{{ '/categories/' | append: cat.slug | relative_url }}" class="category-pill">
+        <span style="width:28px;height:28px;background:{{ cat.color | default: '#5433eb' }};border-radius:50%;display:flex;align-items:center;justify-content:center;"></span>
+        {{ cat.name }}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
 
-                <a class="card" href="https://instagram.com/sheerdalmarket" target="_blank" rel="noopener noreferrer"
-                    aria-label="اینستاگرام شیردال">
-                    <div class="card-icon instagram" aria-hidden="true">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" />
-                            <circle cx="12" cy="12" r="4" />
-                            <circle cx="17.5" cy="6.5" r="1" />
-                        </svg>
-                    </div>
-                    <h3>اینستاگرام</h3>
-                    <p>جدیدترین محصولات و آفرها</p>
-                    <span class="card-link">مشاهده صفحه ←</span>
-                </a>
+  <section class="featured-section" aria-labelledby="featured-heading">
+    <div class="section-header">
+      <h2 id="featured-heading" class="section-header__title">محصولات ویژه</h2>
+      <a href="{{ '/products/' | relative_url }}" class="section-link">مشاهده همه</a>
+    </div>
+    <div class="featured-grid">
+      {% assign featured_products = site.products | limit: 8 %}
+      {% for product in featured_products %}
+        {% include product-card.html product=product %}
+      {% endfor %}
+    </div>
+  </section>
 
-                <a class="card" href="https://t.me/sheerdalmarket_ir" target="_blank" rel="noopener noreferrer"
-                    aria-label="تلگرام شیردال">
-                    <div class="card-icon telegram" aria-hidden="true">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M22 2L11 13" />
-                            <path d="M22 2l-7 20-4-9-9-4 20-7z" />
-                        </svg>
-                    </div>
-                    <h3>تلگرام</h3>
-                    <p>عضویت در کانال رسمی</p>
-                    <span class="card-link">مشاهده کانال ←</span>
-                </a>
-
-                <a class="card" href="https://basalam.com/sheerdalmarket" target="_blank" rel="noopener noreferrer"
-                    aria-label="فروشگاه شیردال در باسلام">
-                    <div class="card-icon basalam" aria-hidden="true">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                            <path d="M3 6h18" />
-                            <path d="M16 10a4 4 0 01-8 0" />
-                        </svg>
-                    </div>
-                    <h3>باسلام</h3>
-                    <p>خرید مستقیم از فروشگاه ما</p>
-                    <span class="card-link">مشاهده فروشگاه ←</span>
-                </a>
-
-                <a class="card" href="https://www.digikala.com/seller/sheerdalmarket" target="_blank"
-                    rel="noopener noreferrer" aria-label="فروشگاه شیردال در دیجی‌کالا">
-                    <div class="card-icon digikala" aria-hidden="true">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                            <line x1="3" y1="10" x2="21" y2="10" />
-                        </svg>
-                    </div>
-                    <h3>دیجی‌کالا</h3>
-                    <p>خرید با ضمانت اصالت کالا</p>
-                    <span class="card-link">مشاهده فروشگاه ←</span>
-                </a>
-
-            </div>
-        </section>
-
-        <section id="contact" class="section section-alt" aria-labelledby="contact-title">
-            <h2 id="contact-title">تماس با ما</h2>
-            <p class="section-sub">هر سوالی دارید، همین حالا با ما در ارتباط باشید</p>
-
-            <div class="contact-grid">
-
-                <a class="contact-item" href="https://wa.me/989000000000" target="_blank" rel="noopener noreferrer">
-                    <div class="contact-icon whatsapp" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C22 6.45 17.5 2 12.04 2z" />
-                        </svg>
-                    </div>
-                    <span>واتساپ</span>
-                </a>
-
-                <a class="contact-item" href="https://t.me/sheerdalmarket_ir?direct" target="_blank"
-                    rel="noopener noreferrer">
-                    <div class="contact-icon telegram" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M22 2L11 13" />
-                            <path d="M22 2l-7 20-4-9-9-4 20-7z" />
-                        </svg>
-                    </div>
-                    <span>تلگرام</span>
-                </a>
-
-                <a class="contact-item" href="https://instagram.com/sheerdalmarket" target="_blank"
-                    rel="noopener noreferrer">
-                    <div class="contact-icon instagram" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" />
-                            <circle cx="12" cy="12" r="4" />
-                            <circle cx="17.5" cy="6.5" r="1" />
-                        </svg>
-                    </div>
-                    <span>اینستاگرام</span>
-                </a>
-
-                <a class="contact-item" href="mailto:info@sheerdalmarket.ir">
-                    <div class="contact-icon email" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="4" width="20" height="16" rx="2" />
-                            <path d="M22 6l-10 7L2 6" />
-                        </svg>
-                    </div>
-                    <span>ایمیل</span>
-                </a>
-
-                <a class="contact-item" href="tel:+989000000000">
-                    <div class="contact-icon phone" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-                        </svg>
-                    </div>
-                    <span>تماس تلفنی</span>
-                </a>
-
-            </div>
-        </section>
-
-        <div class="modal-overlay" id="contactFormModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"
-            hidden>
-            <div class="modal-box">
-                <button type="button" class="modal-close" id="closeContactFormBtn"
-                    aria-label="بستن فرم">&times;</button>
-                <h3 id="modalTitle">ارسال پیام به شیردال</h3>
-                <p class="modal-sub">فرم زیر را پر کنید؛ پیام شما مستقیماً به ایمیل ما ارسال می‌شود.</p>
-
-                <form id="contactForm" action="https://formsubmit.co/ajax/info@sheerdalmarket.ir" method="POST"
-                    novalidate>
-                    <input type="hidden" name="_subject" value="پیام جدید از فرم سایت شیردال">
-                    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-
-                    <div class="form-group">
-                        <label for="fullName">نام و نام‌خانوادگی</label>
-                        <input type="text" id="fullName" name="نام" required autocomplete="name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userEmail">ایمیل</label>
-                        <input type="email" id="userEmail" name="ایمیل" required autocomplete="email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userPhone">شماره موبایل (اختیاری)</label>
-                        <input type="tel" id="userPhone" name="موبایل" pattern="^09[0-9]{9}$" autocomplete="tel">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="userMessage">پیام شما</label>
-                        <textarea id="userMessage" name="پیام" rows="4" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary form-submit" id="formSubmitBtn">ارسال پیام</button>
-                    <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-                </form>
-            </div>
+  <section class="categories-section" aria-labelledby="cats-heading">
+    <div class="section-header">
+      <h2 id="cats-heading" class="section-header__title">دسته‌بندی‌ها</h2>
+    </div>
+    <div class="category-grid">
+      {% for cat in site.data.categories %}
+      <a href="{{ '/categories/' | append: cat.slug | relative_url }}"
+        class="category-card"
+        style="background:{{ cat.bg_color | default: '#f2f4f5' }};"
+      >
+        {% if cat.image %}
+        <img src="{{ cat.image | relative_url }}" alt="دسته‌بندی {{ cat.name }}" class="category-card__img" loading="lazy">
+        {% endif %}
+        <div class="category-card__overlay">
+          <span class="category-card__name">{{ cat.name }}</span>
         </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
 
-    </main>
+  <section class="why-section" aria-labelledby="why-heading">
+    <h2 id="why-heading" class="why-section__title">چرا ما؟</h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <img src="{{ '/assets/img/icon-chat.svg' | relative_url }}" alt="" class="why-item__icon" width="32" height="32">
+        <h3 class="why-item__title">ارتباط مستقیم</h3>
+        <p class="why-item__desc">بدون واسطه، مستقیم با فروشنده در ارتباط باشید</p>
+      </div>
+      <div class="why-item">
+        <img src="{{ '/assets/img/icon-shield-check.svg' | relative_url }}" alt="" class="why-item__icon" width="32" height="32">
+        <h3 class="why-item__title">تضمین کیفیت</h3>
+        <p class="why-item__desc">محصولات اصل با گارانتی معتبر</p>
+      </div>
+      <div class="why-item">
+        <img src="{{ '/assets/img/icon-headphones.svg' | relative_url }}" alt="" class="why-item__icon" width="32" height="32">
+        <h3 class="why-item__title">پشتیبانی سریع</h3>
+        <p class="why-item__desc">پاسخگویی ۲۴ ساعته از طریق واتساپ و تلگرام</p>
+      </div>
+      <div class="why-item">
+        <img src="{{ '/assets/img/icon-heart.svg' | relative_url }}" alt="" class="why-item__icon" width="32" height="32">
+        <h3 class="why-item__title">رضایت مشتری</h3>
+        <p class="why-item__desc">صدها مشتری راضی و اعتماد شده</p>
+      </div>
+    </div>
+  </section>
 
-    <footer class="footer" role="contentinfo">
-        <p>© <span id="year"></span> فروشگاه شیردال، تمامی حقوق محفوظ است.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-
-</html>
+</div>

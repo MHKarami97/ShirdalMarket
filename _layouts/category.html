@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="container--page">
+
+  <nav aria-label="مسیر صفحه" class="breadcrumb">
+    <a href="{{ '/' | relative_url }}">خانه</a>
+    <span class="rtl-flip">›</span>
+    <a href="{{ '/categories/' | relative_url }}">دسته‌بندی‌ها</a>
+    <span class="rtl-flip">›</span>
+    <span class="breadcrumb__current">{{ page.title }}</span>
+  </nav>
+
+  <h1 class="page-title">{{ page.title }}</h1>
+
+  {% assign cat_products = site.products | where: "category", page.category_name %}
+
+  {% if cat_products.size > 0 %}
+  <div class="products-grid">
+    {% for product in cat_products %}
+      {% include product-card.html product=product %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="category-empty">
+    <p class="category-empty__text">محصولی در این دسته‌بندی یافت نشد.</p>
+    <a href="{{ '/products/' | relative_url }}" class="btn-secondary category-empty__link">مشاهده همه محصولات</a>
+  </div>
+  {% endif %}
+</div>
