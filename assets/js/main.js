@@ -313,11 +313,35 @@ const CustomSelect = (() => {
   return { init };
 })();
 
+// ===== Persian Price Formatter =====
+const PersianPrice = (() => {
+  const DIGITS = '۰۱۲۳۴۵۶۷۸۹';
+
+  const toPersian = (str) =>
+    str.replace(/\d/g, d => DIGITS[d]);
+
+  const format = (el) => {
+    const text = el.textContent.trim();
+    const match = text.match(/^([\d,]+)(\s*.+)?$/);
+    if (!match) return;
+    const persian = toPersian(match[1]);
+    const suffix = match[2] || '';
+    el.textContent = persian + suffix;
+  };
+
+  const init = () => {
+    document.querySelectorAll('.price-current, .price-old').forEach(format);
+  };
+
+  return { init, toPersian };
+})();
+
 // ===== DOM Ready Bootstrap =====
 document.addEventListener('DOMContentLoaded', () => {
   ThemeToggle.init();
   Accordion.init();
   CustomSelect.init();
+  PersianPrice.init();
 
   const galleryEl = document.querySelector('[data-gallery]');
   if (galleryEl) Gallery.init(galleryEl);
