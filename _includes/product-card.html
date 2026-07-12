@@ -42,10 +42,10 @@
         <div class="product-card__prices">
           <span class="price-current" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="IRR">
-            <span itemprop="price" content="{{ product.price }}">{{ product.price | number_with_delimiter }} تومان</span>
+            <span itemprop="price" content="{{ product.price }}">{{ product.price }} تومان</span>
           </span>
           {% if product.old_price %}
-          <span class="price-old">{{ product.old_price | number_with_delimiter }}</span>
+          <span class="price-old">{{ product.old_price }} تومان</span>
           {% endif %}
         </div>
 

@@ -74,9 +74,9 @@ schema_type: product
       </div>
 
       <div class="product-pricing">
-        <span class="price-current">{{ page.price | number_with_delimiter }} تومان</span>
+        <span class="price-current">{{ page.price }} تومان</span>
         {% if page.old_price %}
-        <span class="price-old">{{ page.old_price | number_with_delimiter }} تومان</span>
+        <span class="price-old">{{ page.old_price }} تومان</span>
         {% assign discount = page.old_price | minus: page.price | times: 100 | divided_by: page.old_price %}
         <span class="price-discount">{{ discount }}٪ تخفیف</span>
         {% endif %}

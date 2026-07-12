@@ -331,7 +331,7 @@ const PersianPrice = (() => {
   };
 
   const init = () => {
-    document.querySelectorAll('.price-current, .price-old').forEach(format);
+    document.querySelectorAll('.price-current, .price-old, .price-discount').forEach(format);
   };
 
   return { init, formatNumber };
