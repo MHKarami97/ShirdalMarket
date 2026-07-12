@@ -317,23 +317,24 @@ const CustomSelect = (() => {
 const PersianPrice = (() => {
   const DIGITS = '۰۱۲۳۴۵۶۷۸۹';
 
-  const toPersian = (str) =>
-    str.replace(/\d/g, d => DIGITS[d]);
+  const formatNumber = (numStr) => {
+    const raw = numStr.replace(/,/g, '');
+    const withSep = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return withSep.replace(/\d/g, d => DIGITS[d]);
+  };
 
   const format = (el) => {
     const text = el.textContent.trim();
     const match = text.match(/^([\d,]+)(\s*.+)?$/);
     if (!match) return;
-    const persian = toPersian(match[1]);
-    const suffix = match[2] || '';
-    el.textContent = persian + suffix;
+    el.textContent = formatNumber(match[1]) + (match[2] || '');
   };
 
   const init = () => {
     document.querySelectorAll('.price-current, .price-old').forEach(format);
   };
 
-  return { init, toPersian };
+  return { init, formatNumber };
 })();
 
 // ===== DOM Ready Bootstrap =====
