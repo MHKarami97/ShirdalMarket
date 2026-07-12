@@ -1165,6 +1165,50 @@ body {
   color: var(--color-slate-ink);
 }
 
+.product-description h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 28px 0 12px;
+  color: var(--color-ink-black);
+}
+
+.product-description h2:first-child {
+  margin-top: 0;
+}
+
+.product-description p {
+  margin: 0 0 16px;
+}
+
+.product-description ul,
+.product-description ol {
+  margin: 0 0 16px;
+  padding-right: 24px;
+}
+
+.product-description li {
+  margin-bottom: 8px;
+}
+
+.product-description li:last-child {
+  margin-bottom: 0;
+}
+
+.product-description strong {
+  font-weight: 700;
+  color: var(--color-ink-black);
+}
+
+.product-description a {
+  color: var(--color-shop-violet);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.product-description a:hover {
+  opacity: 0.8;
+}
+
 .product-related-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
