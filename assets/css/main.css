@@ -1757,3 +1757,167 @@ body {
     min-width: 240px;
   }
 }
+
+.install-prompt {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    320deg,
+    var(--color-shop-violet),
+    var( --color-violet-wash)
+  );
+  color: white;
+  padding: 5px 5px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(124, 92, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  animation: slideUp 0.3s ease;
+  max-width: calc(100% - 30px);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+.install-prompt-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.install-prompt-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.install-prompt-desc {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.install-btn {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: Vazirmatn, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.install-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
+.close-install {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 4px;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.close-install:hover {
+  opacity: 1;
+}
+
+.file-upload {
+  position: relative;
+}
+
+.file-upload__input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.file-upload__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 148px;
+  padding: 20px;
+  border: 1px dashed var(--color-bebe);
+  border-radius: var(--radius-cards);
+  background: var(--color-faint);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
+}
+
+.file-upload__label:hover {
+  border-color: var(--color-rausch);
+  background: #fff5f7;
+}
+
+.file-upload__input:focus + .file-upload__label {
+  outline: 2px solid var(--color-rausch);
+  outline-offset: 2px;
+}
+
+.file-upload.is-dragover .file-upload__label {
+  border-color: var(--color-rausch);
+  background: #fff1f4;
+  transform: translateY(-1px);
+}
+
+.file-upload__icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.file-upload__text {
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--color-hof);
+}
+
+.file-upload__subtext {
+  font-size: var(--text-caption);
+  color: var(--color-foggy);
+}
+
+.file-upload__meta {
+  margin-top: 10px;
+}
+
+.file-upload__status {
+  display: inline-block;
+  font-size: var(--text-caption);
+  color: var(--color-foggy);
+  background: var(--color-white);
+  border: 1px solid var(--color-bebe);
+  border-radius: var(--radius-badges);
+  padding: 6px 12px;
+  max-width: 100%;
+  word-break: break-word;
+}
