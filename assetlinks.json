@@ -9,7 +9,7 @@ permalink: .well-known/assetlinks.json
       "namespace": "android_app",
       "package_name": "mhk.shirdalmarket",
       "sha256_cert_fingerprints": [
-        ""
+        "3E:B3:0E:AF:68:FF:5A:34:25:23:3F:6A:CC:84:8F:F5:DA:E1:44:A3:9C:E7:98:7F:A1:3F:4A:9A:52:01:55:50"
       ]
     }
   },
@@ -19,7 +19,7 @@ permalink: .well-known/assetlinks.json
       "namespace": "cafebazaar_twa",
       "package_name": "mhk.shirdalmarket",
       "sha256_cert_fingerprints": [
-        ""
+        "3E:B3:0E:AF:68:FF:5A:34:25:23:3F:6A:CC:84:8F:F5:DA:E1:44:A3:9C:E7:98:7F:A1:3F:4A:9A:52:01:55:50"
       ]
     }
   }
